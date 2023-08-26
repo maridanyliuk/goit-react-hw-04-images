@@ -71,7 +71,7 @@ export const App = () => {
       <ImageGallery images={images} onClick={openModal} />
       {loading && <Loader />}
 
-      {shouldRenderLoadMoreButton && <Button onClick={fetchImagesApi} />}
+      {shouldRenderLoadMoreButton && <Button onClick={fetchImages} />}
       {showModal && <Modal onClose={closeModal} src={largeImageURL} />}
     </div>
   );
