@@ -6,6 +6,7 @@ import { Modal } from './Modal/Modal';
 import { Loader } from './Loader/Loader';
 import { fetchImagesApi } from '../api';
 
+
 export const App = () => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
@@ -13,6 +14,8 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [largeImageURL, setLargeImageURL] = useState('');
+
+  const maxPages = 10;
 
   useEffect(() => {
     if (query !== '') {
@@ -49,7 +52,6 @@ export const App = () => {
         images => setImages(prevState => [...prevState, ...images]),
         setPage(prevState => prevState + 1)
       )
-
       .finally(() => setLoading(false));
   };
 
@@ -63,7 +65,7 @@ export const App = () => {
     setLargeImageURL('');
   };
 
-  const shouldRenderLoadMoreButton = images.length > 0 && !loading;
+  const shouldRenderLoadMoreButton = images.length > 0 && !loading && page < maxPages;
 
   return (
     <div className="App">
